@@ -92,8 +92,15 @@ export default class FootballLeague extends League {
                 } else if (goalsDiffA < goalsDiffB) {
                     return 1
                 } else {
-                    // más criterios de evaluacion en caso de empate
-                    return 0
+                    if(teamA.name < teamB.name) {
+                        return -1
+                    } else if(teamA.name > teamB.name) {
+                        return 1
+                    } else {
+                        return 0
+                        // más criterios de evaluacion en caso de empat
+                    }
+                    
                 }
             }
         })
