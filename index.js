@@ -2,7 +2,9 @@ import {teams} from './teams.js';
 
 import FootballLeague from './classes/FootballLeague.js';
 
-let footballLeague = new FootballLeague('SoccerWorldCup', ['A', 'B', 'C', 'D'])
+//let footballLeague = new FootballLeague('SoccerWorldCup', ['A', 'B', 'C', 'D'])
+
+let footballLeague = new FootballLeague('SoccerWorldCup', teams)
 
 footballLeague.scheduleMatchDays();
 
@@ -43,6 +45,7 @@ footballLeague.summaries.forEach((summary, matchDayIndex) => {
     summary.results.forEach((result) => {
         console.log(`${result.homeTeamName} ${result.homeGoals} - ${result.awayGoals} ${result.awayTeamName}`)
     })
+    console.table(summary.standings, ["name","points","goalsFor","goalsAgainst"])
     console.table(summary.standings)
     console.log('\n');
 })
@@ -64,4 +67,8 @@ const finalMetrics = footballLeague.teams.reduce((acc, curr) => {
     return acc
 }, initialMetrics)
 
-console.table(finalMetrics)
+//console.table(finalMetrics, ["points"]);
+console.table(finalMetrics);
+
+
+

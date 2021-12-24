@@ -1,10 +1,14 @@
+import { setupArrays } from '../utils/index.js';
+
+setupArrays();
+
 export default class League {
   
     constructor(name, teams, config = {}) {
         this.name = name;
-
-        this.setupTeams(teams);
         this.setup(config);
+        this.createGroups (teams)
+        this.setupTeams(teams);
         // planificación
         this.matchDaySchedule = [];
         this.summaries = [];
@@ -15,22 +19,41 @@ export default class League {
         throw new Error('Play method must be implemented at child class')
     }
 
+    
     setupTeams(teams) {
         this.teams = [];
+        let indexletterGroups = 0;
+        let indexCount =0;
         for (let teamName of teams) {
-            let teamObj = this.customizeTeam(teamName);
+            let teamObj = this.customizeTeam(teamName, this.letterGroups(indexletterGroups).toLocaleUpperCase());
+            indexCount ++;
+            if(indexCount > this.config.numberTeamsPerGroup - 1) {
+                indexletterGroups ++;
+                indexCount = 0;
+            }
+            
             // añadimos el objeto descriptivo del equipo al array de equipos
             this.teams.push(teamObj)
         }
     }
 
-    customizeTeam(teamName) {
+    letterGroups (indexletterGroups) {
+        let alphabet =String.fromCharCode(...Array(123).keys()).slice(97); 
+        return alphabet[indexletterGroups]
+    }
+
+    customizeTeam(teamName, letterGroup) {
         return {
             name: teamName,
             matchesWon: 0,
             matchesDraw: 0,
-            matchesLost: 0
+            matchesLost: 0,
+            group: letterGroup
         }
+    }
+
+    createGroups (teams) {
+        teams.shuffle();
     }
 
     start() {

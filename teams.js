@@ -2,12 +2,11 @@ export const europeanTeams = ['España', 'Italia','Portugal', 'Francia','Bélgic
 export const americanTeams = ['Canada', 'México','Brasil', 'Argentina','Colombia', 'Uruguay','Ecuador', 'Venezuela'];
 export const africanTeams = ['Túnez', 'Nigeria','Camerún', 'Senegal','Egipto', 'Mauritania','Guinea', 'Angola'];
 export const asianTeams = ['China', 'Japón','Catar', 'India','Omán', 'Nepal','Yemen', 'Filipinas'];
-export const prueba = ['eqA', 'eqB','EqC', 'EqD'];
+
 
 export const teams = [
-    /*...europeanTeams,
+    ...europeanTeams,
     ...americanTeams,
     ...africanTeams,
-    ...asianTeams,*/
-    ...prueba
+    ...asianTeams,
 ];

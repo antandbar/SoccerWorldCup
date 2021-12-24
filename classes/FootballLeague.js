@@ -11,14 +11,15 @@ export default class FootballLeague extends League {
             rounds: 1,
             pointsPerWin: 3, 
             pointsPerDraw: 1, 
-            pointsPerLose: 0, 
+            pointsPerLose: 0,
+            numberTeamsPerGroup: 4 
         }
         this.config = Object.assign(defaultConfig, config);
     } 
     
-    customizeTeam(teamName){
+    customizeTeam(teamName, letterGroup){
         // usamos super.customizeTeam para ejecutar el código de customizeTeam de la clase "padre"
-        const customizedTeam = super.customizeTeam(teamName)
+        const customizedTeam = super.customizeTeam(teamName, letterGroup)
         // usamos spread operator para esparcir los valore de customizedTeam en nuestro nuevo objeto team
         return {
             ...customizedTeam,
