@@ -1,3 +1,4 @@
+import { teams } from '../Teams.js';
 import { setupArrays } from '../utils/index.js';
 
 setupArrays();
@@ -12,6 +13,7 @@ export default class League {
         // planificación
         this.matchDaySchedule = [];
         this.summaries = [];
+ 
 
     }
 
@@ -121,12 +123,25 @@ export default class League {
 
     createRound() {
         const round = [];
+        this.setgroups();
         this.initSchedule(round);
         this.setLocalTeams(round);
         this.setAwayTeams(round);
         this.fixLastTeamSchedule(round);
 
         return round;
+    }
+
+    setgroups (){
+        this.teams.forEach(function(team,index){
+            let indexprueba = index+1;
+            if (team.group === team.group[indexprueba]) {
+                let prueba=team;
+                console.log(prueba);
+            }
+
+        })
+
     }
 
     initSchedule(round) {
@@ -143,7 +158,7 @@ export default class League {
             // recorremos todos los partidos de una jornada
             for (let j = 0; j < numberOfMatchesPerMatchDay; j++) {
                 // generamos un template de partido: match
-                let match = { home: 'home', away: 'away' }
+                let match = { home: 'home', away: 'away'}
                 // llenamos la jornada (matchDay) de partidos
                 matchDay.push(match);
             }
@@ -164,6 +179,7 @@ export default class League {
     getTeamNames() {
         return this.teams.map(team => team.name)
     }
+
 
     setLocalTeams(round) {
         const teamNames = this.getTeamNamesForSchedule(); // teamNames = ['A', 'B', 'C', 'D'] posiciones: 0,1,2,3
