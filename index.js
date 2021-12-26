@@ -2,7 +2,7 @@ import {teams} from './teams.js';
 
 import FootballPlayoff from './classes/FootballPlayoff.js';
 
-let footballPlayoff = new FootballPlayoff(teams);
+let footballPlayoff = new FootballPlayoff("Playoff world championship",teams);
 
 console.log(`\n\n=================================================`)
 console.log(`===== COMIENZO DEL LA FASE DE ELIMINATORIAS =====`)
@@ -11,6 +11,21 @@ console.log(`=================================================\n`)
 console.log(`Los equipos que van a participar en el playoff:\n\n${footballPlayoff.getTeams()}`);
 
 console.log(`\n===== OCTAVOS DE FINAL =====\n`)
+
+let prueba= footballPlayoff.getEighthsfinal();
+for(let i=0; i<prueba.length; i++) {
+    console.log(prueba[i].homeName);
+}
+
+//console.log(footballPlayoff.getEighthsfinal());
+//footballPlayoff.getEighthsfinal().forEach((roundResult) => {
+//    console.log(roundResult);
+//    roundResult.forEach ((match) => {
+//        console.log(match)
+//    });
+        
+        
+//})
 
 console.log(`\n===== CUARTOS DE FINAL =====\n`)
 
@@ -21,4 +36,5 @@ console.log(`\n===== FINAL =====\n`)
 console.log(`\n\n=================================================`)
 console.log(`¡España campeón del mundo!`)
 console.log(`=================================================\n`)
+
 
