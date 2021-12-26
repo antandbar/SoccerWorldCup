@@ -13,15 +13,15 @@ export default class FootballPlayoff extends  Playoff{
 
     play(home, away){
         let match;
-        let goalsHome = this.generateGoals();
-        let goalsAway = this.generateGoals();
+        let homeGoals = this.generateGoals();
+        let awayGoals = this.generateGoals();
 
-        while(goalsHome === goalsAway) {
-            goalsHome = this.generateGoals();
-            goalsAway = this.generateGoals();
+        while(homeGoals === awayGoals) {
+            homeGoals = this.generateGoals();
+            awayGoals = this.generateGoals();
         }
 
-        if(goalsHome > goalsAway){
+        if(homeGoals > awayGoals){
             away.isEliminated= true;
         } else {
             home.isEliminated= true;
@@ -30,8 +30,8 @@ export default class FootballPlayoff extends  Playoff{
         match = { 
             homeName: home.name, 
             awayName: away.name,
-            goalsHome: goalsHome,
-            goalsAway: goalsAway
+            homeGoals: homeGoals,
+            awayGoals: awayGoals
         };
               
         return match;
