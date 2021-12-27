@@ -10,30 +10,21 @@ console.log(`=================================================\n`)
 
 console.log(`Los equipos que van a participar en el playoff:\n\n${footballPlayoff.getTeams()}`);
 
-console.log(`\n===== OCTAVOS DE FINAL =====\n`)
-
 //for(let i=0; i<prueba.length; i++) {
 //    console.log(prueba[i].homeName, prueba[i].awayName);
 //}
 
-footballPlayoff.getEighthsfinal().forEach(roundResult => {
+footballPlayoff.getEighthsfinal().forEach((round) => {
+    console.log(`\n===== ${round.roundName} =====\n`)
+
+  round.roundResult.forEach((match) => {
     let winer;
-    if (roundResult.homeGoals > roundResult.awayGoals) {
-        winer = roundResult.homeName;
-    } else {
-        winer = roundResult.awayName;
-    }
-    console.log(`${roundResult.homeName} ${roundResult.homeGoals}  - ${roundResult.awayGoals} ${roundResult.awayName} => ${winer}`);
-});
-//console.log(footballPlayoff.getEighthsfinal());
-//footballPlayoff.getEighthsfinal().forEach((roundResult) => {
-//    console.log(roundResult);
-//    roundResult.forEach ((match) => {
-//        console.log(match)
-//    });
-        
-        
-//})
+    match.homeGoals > match.awayGoals ? winer = match.homeName : winer = match.awayName;
+    console.log(`${match.homeName} ${match.homeGoals}  - ${match.awayGoals} ${match.awayName} => ${winer}`);
+   })
+
+})
+
 
 console.log(`\n===== CUARTOS DE FINAL =====\n`)
 

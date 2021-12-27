@@ -1,5 +1,5 @@
 import { setupArrays } from '../utils/index.js';
-import {rounds} from '../rounds.js';
+import {rounds, roundsName} from '../rounds.js';
 
 
 
@@ -7,6 +7,7 @@ export default class Playoff {
     constructor(name, teams) {
         setupArrays();
         this.roundResult = [];
+        this.round = [];
         this.teams = this.setupTeams(teams);
     }
     setupTeams(teams) {
@@ -33,6 +34,16 @@ export default class Playoff {
         throw new Error('Play method must be implemented at child class')
     }
 
+    createRound(roundResult) {
+        let roundObject = {
+            roundName: roundsName.eighthsfinal,
+            roundResult: roundResult.map(match=>match)
+            //roundResult: Object.assign({}, roundResult)
+        }
+
+        return roundObject
+    }
+
     getEighthsfinal () {
         if (this.teams.length !== rounds.eighthsfinal) {
             throw new Error('The quarterfinals must have 16 teams')
@@ -45,7 +56,14 @@ export default class Playoff {
         }
         this.teams = this.teams.filter(team => !team.isEliminated); 
 
-        return this.roundResult;
+        //let roundObject = {
+        //    roundName: roundsName.eighthsfinal,
+        //    roundResult: Object.assign({}, this.roundResult)
+        //}
+
+        this.round.push(this.createRound(this.roundResult));
+
+        return this.round;
    
     }
 
