@@ -6,5 +6,13 @@ export const rounds = {
     thirdQuarter: 2
 };
 
+export const roundsName = {
+    eighthsfinal: 'OCTAVOS DE FINAL',
+    quarterfinal: 'CUARTOS DE FINAL',
+    semifinal: 'SEMIFINALES',
+    final: 'FINAL', 
+    thirdQuarter: 'TECER Y CUARTO PUESTO'
+};
+
 
 

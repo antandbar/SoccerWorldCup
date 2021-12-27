@@ -8,8 +8,6 @@ export default class Playoff {
         setupArrays();
         this.roundResult = [];
         this.teams = this.setupTeams(teams);
-        this.getEighthsfinal();
-
     }
     setupTeams(teams) {
         teams.shuffle();
@@ -40,9 +38,13 @@ export default class Playoff {
             throw new Error('The quarterfinals must have 16 teams')
         }
 
-        for(let i=0; i < this.teams.length/2; i+=2) {
-            this.roundResult.push(this.play(this.teams[i], this.teams[i+1]));    
+        for(let i=0; i < this.teams.length; i+=2) {
+
+            this.roundResult.push(this.play(this.teams[i], this.teams[i+1]));  
+            
         }
+        this.teams = this.teams.filter(team => !team.isEliminated); 
+
         return this.roundResult;
    
     }

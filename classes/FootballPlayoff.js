@@ -11,6 +11,8 @@ export default class FootballPlayoff extends  Playoff{
         return Math.floor(Math.random() * 10);
     }
 
+
+
     play(home, away){
         let match;
         let homeGoals = this.generateGoals();
@@ -21,11 +23,8 @@ export default class FootballPlayoff extends  Playoff{
             awayGoals = this.generateGoals();
         }
 
-        if(homeGoals > awayGoals){
-            away.isEliminated= true;
-        } else {
-            home.isEliminated= true;
-        }
+        homeGoals > awayGoals ? away.isEliminated= true : home.isEliminated= true;
+        
         
         match = { 
             homeName: home.name, 
