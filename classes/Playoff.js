@@ -2,7 +2,6 @@ import { setupArrays } from '../utils/index.js';
 import {rounds, roundsName} from '../rounds.js';
 
 
-
 export default class Playoff {
     constructor(name, teams) {
         setupArrays();
@@ -10,6 +9,7 @@ export default class Playoff {
         this.round = [];
         this.teams = this.setupTeams(teams);
     }
+
     setupTeams(teams) {
         teams.shuffle();
         let auxTeams = [];
@@ -34,9 +34,9 @@ export default class Playoff {
         throw new Error('Play method must be implemented at child class')
     }
 
-    createRound(roundResult) {
+    createRound(roundResult, roundsName) {
         let roundObject = {
-            roundName: roundsName.eighthsfinal,
+            roundName: roundsName,
             roundResult: roundResult.map(match=>match)
             //roundResult: Object.assign({}, roundResult)
         }
@@ -44,15 +44,9 @@ export default class Playoff {
         return roundObject
     }
 
-    getEighthsfinal () {
-        if (this.teams.length !== rounds.eighthsfinal) {
-            throw new Error('The quarterfinals must have 16 teams')
-        }
-
+    nextRound(roundsName){
         for(let i=0; i < this.teams.length; i+=2) {
-
             this.roundResult.push(this.play(this.teams[i], this.teams[i+1]));  
-            
         }
         this.teams = this.teams.filter(team => !team.isEliminated); 
 
@@ -61,11 +55,34 @@ export default class Playoff {
         //    roundResult: Object.assign({}, this.roundResult)
         //}
 
-        this.round.push(this.createRound(this.roundResult));
+        this.round.push(this.createRound(this.roundResult, roundsName));
+        this.roundResult = [];
 
         return this.round;
-   
+
     }
 
+    getChampion() {
+        const champion = this.teams.filter(team => !team.isEliminated);
+        if (champion.length !== 1) {
+            throw new Error('getChamplion method must be executed after method start')
+        }
+        return champion[0].name;
+    }
+
+    start() {
+        if (this.teams.length !== rounds.eighthsfinal) {
+            throw new Error('The Payoff must have 16 teams')
+        }
+        this.nextRound(roundsName.eighthsfinal);
+        
+        this.nextRound(roundsName.quarterfinal);
+
+        this.nextRound(roundsName.semifinal);
+
+        this.nextRound(roundsName.final);
+
+        return this.round
+    }
 
 }

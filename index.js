@@ -10,11 +10,7 @@ console.log(`=================================================\n`)
 
 console.log(`Los equipos que van a participar en el playoff:\n\n${footballPlayoff.getTeams()}`);
 
-//for(let i=0; i<prueba.length; i++) {
-//    console.log(prueba[i].homeName, prueba[i].awayName);
-//}
-
-footballPlayoff.getEighthsfinal().forEach((round) => {
+footballPlayoff.start().forEach((round) => {
     console.log(`\n===== ${round.roundName} =====\n`)
 
   round.roundResult.forEach((match) => {
@@ -25,15 +21,8 @@ footballPlayoff.getEighthsfinal().forEach((round) => {
 
 })
 
-
-console.log(`\n===== CUARTOS DE FINAL =====\n`)
-
-console.log(`\n===== SEMIFINALES =====\n`)
-
-console.log(`\n===== FINAL =====\n`)
-
 console.log(`\n\n=================================================`)
-console.log(`¡España campeón del mundo!`)
+console.log(`¡${footballPlayoff.getChampion()} campeón del mundo!`)
 console.log(`=================================================\n`)
 
 
