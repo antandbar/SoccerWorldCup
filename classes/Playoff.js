@@ -1,5 +1,5 @@
 import { setupArrays } from '../utils/index.js';
-import {rounds, roundsName} from '../rounds.js';
+import { rounds, roundsName } from '../rounds.js';
 
 
 export default class Playoff {
@@ -7,6 +7,7 @@ export default class Playoff {
         setupArrays();
         this.roundResult = [];
         this.round = [];
+        this.thirdQuarterTeams = [];
         this.teams = this.setupTeams(teams);
     }
 
@@ -44,29 +45,36 @@ export default class Playoff {
         return roundObject
     }
 
-    nextRound(roundsName){
-        for(let i=0; i < this.teams.length; i+=2) {
-            this.roundResult.push(this.play(this.teams[i], this.teams[i+1]));  
+    nextRound(roundName){
+        if (roundName === roundsName.thirdQuarterTeams) {
+            this.roundResult.push(this.play(this.thirdQuarterTeams[0], this.thirdQuarterTeams[1])); 
+            this.round.push(this.createRound(this.roundResult, roundsName.thirdQuarter));
+            this.roundResult = [];
+            
+            return this.round;
+
+        } else {
+
+            for(let i=0; i < this.teams.length; i+=2) {
+                this.roundResult.push(this.play(this.teams[i], this.teams[i+1]));  
+            }
+
+            if(roundName === roundsName.semifinal) this.thirdQuarterTeams = this.teams.filter(team => team.isEliminated);
+            this.teams = this.teams.filter(team => !team.isEliminated); 
+        
+
+            this.round.push(this.createRound(this.roundResult, roundName));
+            this.roundResult = [];
+
+            return this.round;
         }
-        this.teams = this.teams.filter(team => !team.isEliminated); 
-
-        //let roundObject = {
-        //    roundName: roundsName.eighthsfinal,
-        //    roundResult: Object.assign({}, this.roundResult)
-        //}
-
-        this.round.push(this.createRound(this.roundResult, roundsName));
-        this.roundResult = [];
-
-        return this.round;
 
     }
 
     getChampion() {
         const champion = this.teams.filter(team => !team.isEliminated);
-        if (champion.length !== 1) {
-            throw new Error('getChamplion method must be executed after method start')
-        }
+        if (champion.length !== 1) throw new Error('getChamplion method must be executed after method start')
+        
         return champion[0].name;
     }
 
@@ -80,9 +88,10 @@ export default class Playoff {
 
         this.nextRound(roundsName.semifinal);
 
+        this.nextRound(roundsName.thirdQuarterTeams);
+
         this.nextRound(roundsName.final);
 
         return this.round
     }
-
 }

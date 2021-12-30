@@ -11,6 +11,7 @@ export default class FootballPlayoff extends  Playoff{
         return Math.floor(Math.random() * 10);
     }
 
+
     play(home, away){
         let match;
         let homeGoals = this.generateGoals();
