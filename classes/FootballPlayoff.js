@@ -1,18 +1,19 @@
-import { rounds } from "../rounds.js";
 import Playoff from "./Playoff.js";
 
 export default class FootballPlayoff extends  Playoff{
-    constructor (name, teams, config = {}) {
-        super(name, teams ,config);
-
+    constructor (playoffName, teamsName) {
+        super(playoffName, teamsName);
     }
-
-    generateGoals(){
+// Devuelve el nombre del Playoff
+    getPlayoffName() {
+        return this.playoffName;
+    }
+// Se generan goles aleatoriamente
+    generateGoals() {
         return Math.floor(Math.random() * 10);
     }
-
-
-    play(home, away){
+// Se juegan los partidos, solo puede ganar uno de los Teams
+    play(home, away) {
         let match;
         let homeGoals = this.generateGoals();
         let awayGoals = this.generateGoals();
@@ -21,9 +22,7 @@ export default class FootballPlayoff extends  Playoff{
             homeGoals = this.generateGoals();
             awayGoals = this.generateGoals();
         }
-
-        homeGoals > awayGoals ? away.isEliminated= true : home.isEliminated= true;
-        
+        homeGoals > awayGoals ? away.isEliminated = true : home.isEliminated = true;
         
         match = { 
             homeName: home.name, 
@@ -31,9 +30,6 @@ export default class FootballPlayoff extends  Playoff{
             homeGoals: homeGoals,
             awayGoals: awayGoals
         };
-              
         return match;
-        
     }
-
 }

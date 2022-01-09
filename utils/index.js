@@ -1,3 +1,4 @@
+// Ordena aleatoriamente matrices
 export const setupArrays = () => {
     Array.prototype.shuffle = function() {
         var i = this.length, j, temp;
@@ -9,5 +10,5 @@ export const setupArrays = () => {
            this[j] = temp;
         }
         return this;
-    }
+    } 
 }
