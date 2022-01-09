@@ -1,7 +1,7 @@
 {
   "name": "soccerworldcup",
   "version": "1.0.0",
-  "description": "El proyecto implementa una simulación de grupos y eleminatorias de la copa del mundo de futbol",
+  "description": "El proyecto implementa una simulación de eliminatorias de la copa del mundo de futbol",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
